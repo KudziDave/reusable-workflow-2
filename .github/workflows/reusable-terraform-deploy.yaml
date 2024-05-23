@@ -2,13 +2,9 @@ name: Reusable workflow example
 
 on:
   workflow_call:
-#     inputs:
-#       config-path:
-#         required: true
-#         type: string
     secrets:
       token:
-        required: true
+        required: false
 
 jobs:
   deploy:
