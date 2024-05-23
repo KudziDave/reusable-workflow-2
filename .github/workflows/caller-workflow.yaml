@@ -8,7 +8,7 @@ on:
 jobs:
   call-workflow:
     uses: ./.github/workflows/reusable-terraform-deploy.yaml
-    with:
-      config-path: .github/labeler.yml
+#     with:
+#       # config-path: .github/labeler.yml
     secrets: inherit
 
