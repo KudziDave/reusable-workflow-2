@@ -1,0 +1,14 @@
+name: Call a reusable workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-workflow:
+    uses: ./.github/workflows/reusable-terraform-deploy.yaml
+    with:
+      config-path: .github/labeler.yml
+    secrets: inherit
+
