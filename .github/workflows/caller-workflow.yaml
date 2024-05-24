@@ -10,5 +10,7 @@ jobs:
     uses: ./.github/workflows/reusable-terraform-deploy.yaml
     with:
       working_directory: './terraform'
+      aws_region: 'eu-west-2'
     secrets: inherit
+
 

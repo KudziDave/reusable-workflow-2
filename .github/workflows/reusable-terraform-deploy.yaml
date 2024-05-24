@@ -6,11 +6,9 @@ on:
       working_directory:
         required: true
         type: string
-    secrets:
-      AWS_ACCESS_KEY_ID:
+      aws_region:
         required: true
-      AWS_SECRET_ACCESS_KEY:
-        required: true
+        type: string
 
 jobs:
   terraform:
@@ -28,11 +26,12 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-west-2
+        aws-region: ${{ inputs.aws_region }}
 
     - name: Initialize Terraform
       run: terraform init
 
     - name: Plan Terraform
       run: terraform plan
+
 
