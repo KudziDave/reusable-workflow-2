@@ -1,17 +1,23 @@
-name: Reusable workflow example
+name: Reusable Terraform Workflow
 
 on:
   workflow_call:
+    inputs:
+      working_directory:
+        required: true
+        type: string
     secrets:
-      token:
-        required: false
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
 
 jobs:
-  deploy:
+  terraform:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./terraform
+        working-directory: ${{ github.workspace }}/${{ inputs.working_directory }}
 
     steps:
     - name: Checkout code
@@ -24,16 +30,9 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-west-2
 
-    - name: Install Terraform
-      run: |
-        curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-        sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-        sudo apt-get update && sudo apt-get install terraform
-
     - name: Initialize Terraform
       run: terraform init
-      # working-directory: ./terraform
-  
+
     - name: Plan Terraform
       run: terraform plan
-      # working-directory: ./terraform
+
