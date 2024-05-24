@@ -7,7 +7,7 @@ on:
 
 jobs:
   call-workflow:
-    uses: ./.github/workflows/reusable-terraform-deploy.yaml@main
+    uses: ./.github/workflows/reusable-terraform-deploy.yaml
     with:
       working_directory: './terraform'
     secrets: inherit
